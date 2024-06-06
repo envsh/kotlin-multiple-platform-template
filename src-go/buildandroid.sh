@@ -20,5 +20,5 @@ RUSTUP_TOOLCHAIN=$CC
 #GOOS=android  GOARCH=arm64  CGO_LDFLAGS="-arch arm64" CGO_ENABLED=1 go build -buildmode=c-shared -o ../fedimuigo.so
 GOOS=android  GOARCH=arm64  CGO_CFLAGS="-arch arm64" CGO_LDFLAGS="-arch arm64" CGO_ENABLED=1 go build -buildmode=c-shared -o ../jniLibs/libhellogo.so
 # GOOS=android GOARCH=arm64 CGO_ENABLED=1 go build -v -x -buildmode=c-shared
-# otool -L ../libhello.rs.so | grep my_project
-$NDKDIR/bin/llvm-objdump -x ../libhellogo.so |grep NEEDED
+# otool -L ../libhellors.so | grep my_project
+$NDKDIR/bin/llvm-objdump -x ../jniLibs/libhellogo.so |grep NEEDED

@@ -12,4 +12,11 @@ class MainActivity : AppCompatActivity() {
             MainView()
         }
     }
+
+        companion object {
+        init {
+            System.loadLibrary("hellogo")
+            // System.loadLibrary("hellors_lib")
+        }
+    }
 }
