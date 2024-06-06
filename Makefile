@@ -4,14 +4,30 @@ export ANDROID_HOME=/opt/android-sdk/
 export JAVA_HOME=/nix/store/rflj4qrjp5km8kqfwh2s70s64y4d904v-zulu-ca-jdk-17.0.10/
 export GRADLE_CACHE=$(HOME)/.gradle/caches/modules-2/files-2.1
 
+#
+#On Windows, it maps to PATH
+#On Linux, it maps to LD_LIBRARY_PATH
+#On OS X, it maps to DYLD_LIBRARY_PATH
+export DYLD_LIBRARY_PATH=$(PWD)/jniLibs
+export LD_LIBRARY_PATH=$(PWD)/jniLibs
+
 all:
 
 
 runpc:
 	./gradlew desktopApp:run   --info
 
-bd:
+bdpc:
 	./gradlew desktopApp:build   --info
+
+# android aarch64
+golibarm:
+	cd src-go && ./buildandroid.sh
+	cp -v fedimuigo.so src-tauri/gen/android/app/src/main/jniLibs/arm64-v8a/libfedimuigo.so
+
+golibx86:
+	cd src-go && CGO_ENABLED=1 go build -buildmode=c-shared -o ../jniLibs/libhellogo.dylib
+	ls -lh jniLibs
 
 env:
 	./gradlew -v
